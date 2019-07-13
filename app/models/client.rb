@@ -2,7 +2,10 @@ class Client < ApplicationRecord
   include Fae::BaseModelConcern
 
   has_many :campaign_clients, dependent: :destroy
+  has_many :address_clients, dependent: :destroy
+  
   has_many :campaigns, through: :campaign_clients
+  has_many :addresses, through: :address_clients
 
   validates :phone, presence: true
   validates :email,

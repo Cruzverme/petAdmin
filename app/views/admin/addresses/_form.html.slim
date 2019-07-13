@@ -1,0 +1,12 @@
+= simple_form_for(['admin', @item]) do |f|
+  == render 'fae/shared/form_header', header: @klass_name
+
+  main.content
+    = fae_input f, :street
+    = fae_input f, :number
+    = fae_input f, :city
+    = fae_input f, :postal_code
+    //= fae_input f, :country
+    = fae_pulldown f, :country, size: 'short', collection: ['BR','US']
+    
+    = fae_association f, :client
