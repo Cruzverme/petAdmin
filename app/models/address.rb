@@ -3,6 +3,8 @@ class Address < ApplicationRecord
   
   belongs_to :client
 
+  validates :client, presence: true
+
   def fae_display_field
     street
   end
