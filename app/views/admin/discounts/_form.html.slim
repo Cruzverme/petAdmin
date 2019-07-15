@@ -3,5 +3,14 @@
 
   main.content
     = fae_input f, :title
-    = fae_prefix f, :value, prefix: '$', placeholder: '50.00'
+    = fae_radio f, :percentual, type: 'inline'
+        - if :percentual 
+            checked => false 
+    
+   
+    - if(@item.percentual)
+        = fae_suffix f, :value, suffix: '%', placeholder: '50'
+    - else
+        = fae_prefix f, :value, prefix: '$', placeholder: '50'
+        
 
