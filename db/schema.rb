@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190714190120) do
+ActiveRecord::Schema.define(version: 20190715233151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -228,6 +228,15 @@ ActiveRecord::Schema.define(version: 20190714190120) do
     t.index ["supplier_id"], name: "index_products_on_supplier_id", using: :btree
   end
 
+  create_table "scheduler_clients", force: :cascade do |t|
+    t.integer  "scheduler_id"
+    t.integer  "client_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["client_id"], name: "index_scheduler_clients_on_client_id", using: :btree
+    t.index ["scheduler_id"], name: "index_scheduler_clients_on_scheduler_id", using: :btree
+  end
+
   create_table "schedulers", force: :cascade do |t|
     t.integer  "client_id"
     t.integer  "service_id"
@@ -294,6 +303,8 @@ ActiveRecord::Schema.define(version: 20190714190120) do
   add_foreign_key "campaign_clients", "campaigns"
   add_foreign_key "campaign_clients", "clients"
   add_foreign_key "products", "suppliers"
+  add_foreign_key "scheduler_clients", "clients"
+  add_foreign_key "scheduler_clients", "schedulers"
   add_foreign_key "schedulers", "clients"
   add_foreign_key "schedulers", "services"
   add_foreign_key "sell_products", "products"
